@@ -55,12 +55,6 @@
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        .warning-modal {
-            border-top: 8px solid #fbbf24;
-        }
-        .confirm-modal {
-            border-top: 8px solid #0ea5e9;
-        }
     </style>
 </head>
 <body class="min-h-screen py-10 px-4">
@@ -84,7 +78,7 @@
                 <!-- วันที่สำคัญ -->
                 <div>
                     <label class="block text-sky-700 font-bold mb-1">📅 วันที่สำคัญ (Date) - สำหรับแสดงบนหน้าเว็บ</label>
-                    <input type="text" name="วันที่สำคัญ" placeholder="เว็บ การ์ดวันเกิด , เว็บการ์ดวันครบรอบ เช่น 14/02/69" class="w-full p-3 rounded-xl border-2 border-sky-100 input-focus transition-all">
+                    <input type="text" name="วันที่สำคัญ" id="event_date" placeholder="เว็บ การ์ดวันเกิด , เว็บการ์ดวันครบรอบ เช่น 14/02/69" class="w-full p-3 rounded-xl border-2 border-sky-100 input-focus transition-all">
                     <p class="text-[10px] text-red-500 mt-1 ml-1 leading-tight">* หากเป็นเว็บการ์ดอื่นๆ ที่ไม่ต้องใช้วันเดือนปี ไม่ต้องใส่ข้อมูลในช่องนี้</p>
                 </div>
 
@@ -105,7 +99,6 @@
                     <div class="flex-1">
                         <label class="block text-sky-700 font-bold mb-2 required-label">🎨 โทนสีที่ใช้ (Color Tone)</label>
                         <input type="text" name="โทนสีที่ใช้" id="color_tone" placeholder="เช่น #da3371 , #ff86b0 , #f18daf" class="w-full p-3 rounded-xl border-2 border-sky-100 input-focus transition-all">
-                        <!-- แก้ไขข้อความหมายเหตุตามคำขอ -->
                         <p class="text-[10px] text-red-500 mt-1 ml-1 leading-tight">* สามารถระบุโค้ดสีได้มากกว่า 1 สี เพื่อให้งานออกมาตรงใจที่สุดครับ</p>
                     </div>
                     <div class="flex-1">
@@ -139,7 +132,6 @@
                             <p class="text-gray-600 mb-2">
                                 ข้าพเจ้ายินยอมให้ร้าน <span class="font-bold text-sky-600">WHALE</span> จัดเก็บและใช้ข้อมูลส่วนบุคคล (เช่น ชื่อ และข้อมูลพื้นฐานอื่นๆ) เพื่อวัตถุประสงค์ในการสร้างสรรค์เว็บการ์ดตามคำขอเพียงอย่างเดียวเท่านั้น โดยทางร้านขอรับรองว่าจะไม่มีการนำข้อมูลไปเผยแพร่หรือใช้งานในส่วนอื่นก่อนได้รับอนุญาตจากท่าน
                             </p>
-                            <!-- ข้อความแจ้งเตือนทางกฎหมาย -->
                             <p class="text-xs text-red-500 font-semibold italic underline">
                                 * ห้ามนำเทมเพลตไปแจกจ่ายหรือใช้เชิงพาณิชย์โดยไม่ได้รับอนุญาต หากพบเห็นจะดำเนินคดีตามกฎหมายอย่างถึงที่สุด
                             </p>
@@ -156,7 +148,7 @@
 
         <!-- Confirm Modal -->
         <div id="confirmModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-[80]">
-            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop confirm-modal">
+            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop">
                 <div class="text-4xl mb-4">🐋</div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">ตรวจสอบความเรียบร้อย</h3>
                 <p class="text-gray-500 text-sm mb-6 leading-relaxed">ข้อมูลของคุณถูกต้องและครบถ้วนแล้วใช่หรือไม่? หากยืนยันแล้วน้องวาฬจะเริ่มนำส่งข้อมูลทันทีครับ</p>
@@ -169,7 +161,7 @@
 
         <!-- Warning Modal -->
         <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-[70]">
-            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop warning-modal">
+            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop">
                 <div class="text-4xl mb-4">⚠️</div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">ข้อมูลยังไม่ครบถ้วน</h3>
                 <p id="warningMessage" class="text-gray-500 text-sm mb-6 leading-relaxed"></p>
@@ -184,7 +176,7 @@
                     <img src="https://i.ibb.co/k268SxR2/WHALE3.png" alt="Whale Loading" class="w-24 h-24 mx-auto object-contain">
                 </div>
                 <h3 class="text-2xl font-bold text-sky-600 mb-2">กำลังส่งข้อมูล...</h3>
-                <p class="text-gray-500 text-sm mb-4">น้องวาฬกำลังส่งข้อมูลไปบันทึก โปรดรอสักครู่ครับ</p>
+                <p class="text-gray-500 text-sm">น้องวาฬกำลังส่งข้อมูลไปบันทึก โปรดรอสักครู่ครับ</p>
                 <div class="bg-sky-50 rounded-full px-4 py-2 inline-flex items-center gap-2 mb-2">
                     <span class="loader border-sky-500 border-t-white"></span>
                     <span class="text-sky-600 font-bold text-xs">กำลังบันทึกข้อมูล</span>
@@ -204,7 +196,8 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxP2B1BWkxukcdXxVeYBCnWM4W-bCSE0PZm5-oyHU_tKU1I6Px9y3BHXmuuXOWMdL3wIw/exec';
+        // URL ล่าสุดของคุณ
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxx9TN-gY6zjVsmvXk7_d0c7YI2OYDgegVaiUhyVwt39URgk2fIIYqvsUAMyIQu6u6Uwg/exec';
 
         function showWarning(msg) {
             document.getElementById('warningMessage').innerText = msg;
@@ -256,17 +249,8 @@
                 return false;
             }
 
-            const musicUrl = document.getElementById('music_url').value.trim();
-            try {
-                new URL(musicUrl);
-            } catch (_) {
-                showWarning('ลิงก์เพลงประกอบไม่ถูกต้อง กรุณาตรวจสอบลิงก์อีกครั้งครับ');
-                document.getElementById('music_url').focus();
-                return false;
-            }
-
             if (!document.getElementById('consent_checkbox').checked) {
-                showWarning('กรุณาอ่านและกดยอมรับข้อตกลงความเป็นส่วนตัวก่อนส่งข้อมูลครับ');
+                showWarning('กรุณากดยอมรับข้อตกลงก่อนส่งข้อมูลครับ');
                 return false;
             }
 
@@ -295,25 +279,31 @@
             uploadingModal.classList.remove('hidden');
             uploadingModal.classList.add('flex');
 
-            const formData = new FormData(document.getElementById('orderForm'));
-            const data = Object.fromEntries(formData.entries());
+            const form = document.getElementById('orderForm');
+            const formData = new FormData(form);
+            
+            const params = new URLSearchParams();
+            formData.forEach((value, key) => {
+                params.append(key, value);
+            });
 
             try {
-                const params = new URLSearchParams();
-                for (const key in data) {
-                    params.append(key, data[key]);
-                }
-
+                // ส่งข้อมูลเข้าสู่ Google Apps Script
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
+                    // ใช้ mode: 'no-cors' เพื่อหลีกเลี่ยง CORS error ในเบื้องต้น (แต่จะไม่ทราบ response)
+                    mode: 'no-cors', 
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: params.toString(),
+                    body: params.toString()
                 });
 
-                uploadingModal.classList.add('hidden');
-                uploadingModal.classList.remove('flex');
-                showSuccess();
+                // จำลองสถานะสำเร็จเนื่องจากโหมด no-cors จะไม่อ่าน response กลับมา
+                setTimeout(() => {
+                    uploadingModal.classList.add('hidden');
+                    uploadingModal.classList.remove('flex');
+                    showSuccess();
+                }, 1500);
+
             } catch (error) {
                 console.error('Error:', error);
                 uploadingModal.classList.add('hidden');
@@ -338,6 +328,7 @@
         function closeModal() {
             document.getElementById('successModal').classList.add('hidden');
             document.getElementById('orderForm').reset();
+            location.reload();
         }
     </script>
 </body>
